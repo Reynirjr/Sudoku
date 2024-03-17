@@ -8,11 +8,13 @@ public class MenuController {
     @FXML
     private SudokuController sudokuController;
 
+
     private String erfidleikastig = "";
 
     public void setSudokuController(SudokuController aThis) {
         sudokuController = aThis;
     }
+
 
     public void initialize() {
 

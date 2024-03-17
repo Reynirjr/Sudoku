@@ -13,33 +13,6 @@
             <Button mnemonicParsing="false" text="Button"/>
             <Button mnemonicParsing="false" text="Button"/>
         </HBox>
-        <GridPane fx:id="sudokuGrid" alignment="CENTER" gridLinesVisible="true" maxHeight="400.0" maxWidth="400.0"
-                  minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="400.0">
-            <columnConstraints>
-                <ColumnConstraints/>
-                <ColumnConstraints/>
-                <ColumnConstraints/>
-                <ColumnConstraints/>
-                <ColumnConstraints/>
-                <ColumnConstraints/>
-                <ColumnConstraints/>
-                <ColumnConstraints/>
-                <ColumnConstraints/>
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints/>
-            </rowConstraints>
-            <VBox.margin>
-                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
-            </VBox.margin>
-        </GridPane>
+        <fx:include fx:id="leikbordStyring" source="leikbord-view.fxml"/>
     </children>
 </VBox>
