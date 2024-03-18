@@ -49,6 +49,8 @@ public class LeikbordController {
                 reiturTextField.setMaxWidth(Double.MAX_VALUE);
                 reiturTextField.setMaxHeight(Double.MAX_VALUE);
 
+                reiturTextField.setOnMouseClicked(mouseEvent -> reiturTextField.setStyle("-fx-background-color: lightblue;"));
+
                 //breytir stærð og fontinu
                 reiturTextField.setFont(Font.font("Comic Sans MS", 16));
 
@@ -63,6 +65,16 @@ public class LeikbordController {
                 reiturTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                     if (newValue.length() > 1) {
                         reiturTextField.setText(newValue.substring(0, 1));
+                    }
+                });
+
+                reiturTextField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+                    if (isNowFocused) {
+                        reiturTextField.setEditable(true);
+                        reiturTextField.setStyle("-fx-background-color: lightblue;");
+                    } else {
+                        reiturTextField.setEditable(false);
+                        reiturTextField.setStyle("-fx-background-color: white;");
                     }
                 });
 
