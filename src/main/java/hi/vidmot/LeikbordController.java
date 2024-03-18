@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class LeikbordController {
     @FXML
@@ -48,6 +49,9 @@ public class LeikbordController {
                 reiturTextField.setMaxWidth(Double.MAX_VALUE);
                 reiturTextField.setMaxHeight(Double.MAX_VALUE);
 
+                //breytir stærð og fontinu
+                reiturTextField.setFont(Font.font("Comic Sans MS", 16));
+
                 //Þarf að vera 1 - 9
                 reiturTextField.addEventFilter(KeyEvent.KEY_TYPED, keyEvent -> {
                     if (!"123456789".contains(keyEvent.getCharacter())) {
@@ -69,7 +73,7 @@ public class LeikbordController {
 
                 reiturTextField.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null,
                         new BorderWidths(toppur, haegri, botn, vinstri))));
-               
+
                 sudokuGrid.add(reiturTextField, col, row);
                 GridPane.setFillWidth(reiturTextField, true);
                 GridPane.setFillHeight(reiturTextField, true);
