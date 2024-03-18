@@ -1,9 +1,8 @@
 package hi.vidmot;
 
 import javafx.fxml.FXML;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class LeikbordController {
     @FXML
@@ -21,14 +20,13 @@ public class LeikbordController {
     public void initialize() {
         sudokuGrid.widthProperty().addListener((obs, oldVal, newVal) -> updateGridSize());
         sudokuGrid.heightProperty().addListener((obs, oldVal, newVal) -> updateGridSize());
-        populateGrid();
+        fyllaGrid();
     }
 
     private void updateGridSize() {
         double size = Math.min(sudokuGrid.getWidth(), sudokuGrid.getHeight());
         sudokuGrid.setPrefSize(size, size);
         sudokuGrid.setMaxSize(size, size);
-        // Adjust row and column sizes within the grid
         for (ColumnConstraints cc : sudokuGrid.getColumnConstraints()) {
             cc.setPrefWidth(size / 9);
         }
@@ -37,7 +35,27 @@ public class LeikbordController {
         }
     }
 
-    private void populateGrid() {
-        // Populate your grid with cells here, adjust as necessary for your application
+    private void fyllaGrid() {
+        //Þykkt á borders
+        double innriBorderThickness = 0.5;
+        double ytriBorderThickness = 3.0;
+
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                Pane reiturPane = new Pane();
+
+                double toppur = row == 0 || row % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
+                double haegri = (col + 1) % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
+                double botn = (row + 1) % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
+                double vinstri = col == 0 || col % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
+
+                BorderStroke borderStroke = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(toppur, haegri, botn, vinstri));
+
+                reiturPane.setBorder(new Border(borderStroke));
+                sudokuGrid.add(reiturPane, col, row);
+            }
+
+        }
     }
+
 }
