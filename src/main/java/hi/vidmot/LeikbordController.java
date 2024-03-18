@@ -49,7 +49,6 @@ public class LeikbordController {
                 reiturTextField.setMaxWidth(Double.MAX_VALUE);
                 reiturTextField.setMaxHeight(Double.MAX_VALUE);
 
-                reiturTextField.setOnMouseClicked(mouseEvent -> reiturTextField.setStyle("-fx-background-color: lightblue;"));
 
                 //breytir stærð og fontinu
                 reiturTextField.setFont(Font.font("Comic Sans MS", 16));
@@ -68,6 +67,8 @@ public class LeikbordController {
                     }
                 });
 
+
+                //valin reitur verður blár, verður hvítur ef annar reitur er síðan valinn.
                 reiturTextField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
                     if (isNowFocused) {
                         reiturTextField.setEditable(true);
@@ -78,10 +79,11 @@ public class LeikbordController {
                     }
                 });
 
-                double toppur = row == 0 || row % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
+                //Gerir línurnar á milli þykkar á endunum og á milli "subgrids"
+                double toppur = row % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
                 double haegri = (col + 1) % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
                 double botn = (row + 1) % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
-                double vinstri = col == 0 || col % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
+                double vinstri = col % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
 
                 reiturTextField.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null,
                         new BorderWidths(toppur, haegri, botn, vinstri))));
