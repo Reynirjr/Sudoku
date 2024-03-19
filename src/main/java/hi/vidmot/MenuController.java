@@ -65,4 +65,18 @@ public class MenuController {
         }
 
     }
+
+    /**
+     * kallar á information alert sem gefur upplýsingar um höfund forrits og ártal
+     *
+     * @param actionEvent
+     */
+    public void onUmFor(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Um forritið");
+        alert.setHeaderText(null);
+        alert.setContentText("Höfundar: Benjamín Reynir Jóhannsson, \n Egill Arnar Helgason, \n Róbert Orri Stefánsson \n \nÁrtal: Haust 2024 \n \nForritið býr til Sudoku púsl fyrir notandan til að leysa.");
+
+        alert.showAndWait();
+    }
 }
