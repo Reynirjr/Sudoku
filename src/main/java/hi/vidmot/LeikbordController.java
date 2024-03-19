@@ -18,7 +18,7 @@ public class LeikbordController {
     @FXML
     private SudokuController sudokuController;
 
-    private int[][] bord = new int[9][9];//Sudoku borðið
+    private final int[][] bord = new int[9][9];//Sudoku borðið
 
 
     public void setSudokuController(SudokuController aThis) {
