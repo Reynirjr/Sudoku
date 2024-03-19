@@ -45,7 +45,7 @@ public class LeikbordController {
     }
 
     private void fyllaGrid() {
-        buaTilSudoku();
+        buaTilSudoku();//fyllir borðið á slembin hátt
         //Þykkt á borders
         double innriBorderThickness = 0.5;
         double ytriBorderThickness = 3.0;
@@ -136,7 +136,7 @@ public class LeikbordController {
     }
 
     private void buaTilSudoku() {
-        fylltbord(0, 0);
+        fylltbord(0, 0);//fyllir borðið frá top-vinstra horni
     }
 
 }
