@@ -7,12 +7,18 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class LeikbordController {
     @FXML
     private GridPane sudokuGrid;
 
     @FXML
     private SudokuController sudokuController;
+
+    private int[][] bord = new int[9][9];//Sudoku borðið
 
 
     public void setSudokuController(SudokuController aThis) {
@@ -39,6 +45,7 @@ public class LeikbordController {
     }
 
     private void fyllaGrid() {
+        buaTilSudoku();
         //Þykkt á borders
         double innriBorderThickness = 0.5;
         double ytriBorderThickness = 3.0;
@@ -46,6 +53,8 @@ public class LeikbordController {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 TextField reiturTextField = new TextField();
+                reiturTextField.setText((Integer.toString(bord[row][col])));
+
                 reiturTextField.setMaxWidth(Double.MAX_VALUE);
                 reiturTextField.setMaxHeight(Double.MAX_VALUE);
 
@@ -94,6 +103,40 @@ public class LeikbordController {
             }
 
         }
+    }
+
+    private boolean fylltbord(int row, int col) {
+        if (row == 9) {
+            row = 0;
+            if (++col == 9) return true;
+        }
+        if (bord[row][col] != 0) return fylltbord(row + 1, col);
+        List<Integer> nums = new ArrayList<>();
+        for (int i = 1; i <= 9; i++) nums.add(i);
+        Collections.shuffle(nums);//slembin númer
+
+        for (Integer num : nums) {
+            if (erRettStadsetning(row, col, num)) {
+                bord[row][col] = num;
+                if (fylltbord(row + 1, col)) return true;
+                bord[row][col] = 0;
+            }
+        }
+        return false;
+    }
+
+    private boolean erRettStadsetning(int row, int col, int num) {
+        for (int i = 0; i < 9; i++) {
+            if (bord[i][col] == num || bord[row][i] == num) return false;
+            int boxRow = 3 * (row / 3) + i / 3;
+            int boxCol = 3 * (col / 3) + i % 3;
+            if (bord[boxRow][boxCol] == num) return false;
+        }
+        return true;
+    }
+
+    private void buaTilSudoku() {
+        fylltbord(0, 0);
     }
 
 }
