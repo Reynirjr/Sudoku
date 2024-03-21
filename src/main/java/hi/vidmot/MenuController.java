@@ -12,6 +12,9 @@ public class MenuController {
     @FXML
     private SudokuController sudokuController;
 
+    @FXML
+    private LeikbordController leikbordController;
+
 
     private String erfidleikastig = "";
 
@@ -33,7 +36,7 @@ public class MenuController {
         RadioMenuItem selectedMenuItem = (RadioMenuItem) actionEvent.getSource();
         setErfidleikastig(selectedMenuItem.getText());
         System.out.println("Valið erfiðleikastig: " + erfidleikastig);
-
+        
     }
 
     //setter fyrir erfiðleikastigin
@@ -79,4 +82,6 @@ public class MenuController {
 
         alert.showAndWait();
     }
+
+
 }
