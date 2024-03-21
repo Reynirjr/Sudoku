@@ -10,6 +10,7 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class LeikbordController {
     @FXML
@@ -18,6 +19,11 @@ public class LeikbordController {
     @FXML
     private SudokuController sudokuController;
 
+    @FXML
+    private MenuController menuController;
+
+    private int erfidleiki = 0;
+
     private final int[][] bord = new int[9][9];//Sudoku borðið
 
 
@@ -25,6 +31,9 @@ public class LeikbordController {
         sudokuController = aThis;
     }
 
+    public void setMenuController(MenuController aThis) {
+        menuController = aThis;
+    }
 
     public void initialize() {
         sudokuGrid.widthProperty().addListener((obs, oldVal, newVal) -> updateGridStaerd());
@@ -53,8 +62,14 @@ public class LeikbordController {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 TextField reiturTextField = new TextField();
-                reiturTextField.setText((Integer.toString(bord[row][col])));
 
+                if (bord[row][col] != 0) {
+                    reiturTextField.setText(Integer.toString(bord[row][col]));
+                } else {
+                    reiturTextField.setText(""); // Ensure cells intended to be empty are indeed empty
+                }
+
+               
                 reiturTextField.setMaxWidth(Double.MAX_VALUE);
                 reiturTextField.setMaxHeight(Double.MAX_VALUE);
 
@@ -137,6 +152,40 @@ public class LeikbordController {
 
     private void buaTilSudoku() {
         fylltbord(0, 0);//fyllir borðið frá top-vinstra horni
+        geraPusl(30);
     }
+
+
+    private void geraPusl(int toRemove) {
+        Random rand = new Random();
+        int removed = 0;
+        while (removed < toRemove) {
+            int row = rand.nextInt(9);
+            int col = rand.nextInt(9);
+            if (bord[row][col] != 0) {
+                int backup = bord[row][col];
+                bord[row][col] = 0;
+
+                /*hér á ég eftir að útfæra solver sem skoðar hvort að þegar aðferðin tekur einn
+                reit í burtu að það skapi ekki púsl með með fleirri en einni lausn.
+                */
+                removed++;
+            }
+        }
+    }
+
+    public int updateErfidleikastig(String erfidleikastig) {
+        if (erfidleikastig.equals("Auðvelt")) {
+            return 30;
+        } else if (erfidleikastig.equals("Miðlungs")) {
+            return 35;
+        } else if (erfidleikastig.equals("Erfitt")) {
+            return 40;
+        } else if (erfidleikastig.equals("Ómögulegt")) {
+            return 47;
+        } else
+            return 30;
+    }
+
 
 }
