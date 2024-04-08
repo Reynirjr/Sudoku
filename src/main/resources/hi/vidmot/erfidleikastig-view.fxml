@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" fx:controller="hi.vidmot.ErfidleikastigController" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label layoutX="189.0" layoutY="42.0" text="SUDOKU!">
+            <font>
+                <Font name="Comic Sans MS Bold" size="48.0"/>
+            </font>
+        </Label>
+        <Label layoutX="188.0" layoutY="164.0" text="Veldu Erfiðleikastig">
+            <font>
+                <Font name="Comic Sans MS" size="24.0"/>
+            </font>
+        </Label>
+        <HBox alignment="CENTER" layoutX="89.0" layoutY="249.0" spacing="40.0">
+            <children>
+                <Button fx:id="Easy" alignment="CENTER" mnemonicParsing="false" onAction="#onEasy" text="Auðvelt"
+                        textFill="#29ae24">
+                    <font>
+                        <Font name="Comic Sans MS Bold" size="12.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button fx:id="Mid" mnemonicParsing="false" onAction="#onMid" text="Miðlungs" textFill="#ff9100">
+                    <font>
+                        <Font name="Comic Sans MS Bold" size="12.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button fx:id="Dif" mnemonicParsing="false" onAction="#onDif" text="Erfitt" textFill="RED">
+                    <font>
+                        <Font name="Comic Sans MS Bold" size="12.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="Extreme" mnemonicParsing="false" onAction="#onExtreme" text="Ómögulegt">
+                    <font>
+                        <Font name="Showcard Gothic" size="12.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+        </HBox>
+    </children>
+</AnchorPane>

@@ -13,22 +13,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#onQuit" text="Hætta"/>
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Erfiðleikastig">
-                    <items>
-                        <RadioMenuItem mnemonicParsing="false" onAction="#onErfidleikastig" selected="true"
-                                       text="Auðvelt">
-                            <toggleGroup>
-                                <ToggleGroup fx:id="Erfidleikastig"/>
-                            </toggleGroup>
-                        </RadioMenuItem>
-                        <RadioMenuItem mnemonicParsing="false" onAction="#onErfidleikastig" text="Miðlungs"
-                                       toggleGroup="$Erfidleikastig"/>
-                        <RadioMenuItem mnemonicParsing="false" onAction="#onErfidleikastig" text="Erfitt"
-                                       toggleGroup="$Erfidleikastig"/>
-                        <RadioMenuItem mnemonicParsing="false" onAction="#onErfidleikastig" text="Ómögulegt"
-                                       toggleGroup="$Erfidleikastig"/>
-                    </items>
-                </Menu>
+
                 <Menu mnemonicParsing="false" text="Hjálp">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Hvernig á að spila"/>
