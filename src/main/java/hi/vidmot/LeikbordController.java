@@ -1,6 +1,7 @@
 package hi.vidmot;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -24,6 +25,7 @@ public class LeikbordController {
 
     private int erfidleiki = 0;
 
+
     private final int[][] bord = new int[9][9];//Sudoku borðið
 
 
@@ -38,7 +40,6 @@ public class LeikbordController {
     public void initialize() {
         sudokuGrid.widthProperty().addListener((obs, oldVal, newVal) -> updateGridStaerd());
         sudokuGrid.heightProperty().addListener((obs, oldVal, newVal) -> updateGridStaerd());
-        fyllaGrid();
     }
 
     private void updateGridStaerd() {
@@ -69,7 +70,7 @@ public class LeikbordController {
                     reiturTextField.setText(""); // Ensure cells intended to be empty are indeed empty
                 }
 
-               
+
                 reiturTextField.setMaxWidth(Double.MAX_VALUE);
                 reiturTextField.setMaxHeight(Double.MAX_VALUE);
 
@@ -115,6 +116,8 @@ public class LeikbordController {
                 sudokuGrid.add(reiturTextField, col, row);
                 GridPane.setFillWidth(reiturTextField, true);
                 GridPane.setFillHeight(reiturTextField, true);
+                GridPane.setRowIndex(reiturTextField, row);
+                GridPane.setColumnIndex(reiturTextField, col);
             }
 
         }
@@ -152,39 +155,51 @@ public class LeikbordController {
 
     private void buaTilSudoku() {
         fylltbord(0, 0);//fyllir borðið frá top-vinstra horni
-        geraPusl(30);
+        geraPusl(erfidleiki);
     }
 
 
-    private void geraPusl(int toRemove) {
-        Random rand = new Random();
-        int removed = 0;
-        while (removed < toRemove) {
-            int row = rand.nextInt(9);
-            int col = rand.nextInt(9);
-            if (bord[row][col] != 0) {
-                int backup = bord[row][col];
-                bord[row][col] = 0;
+    private void geraPusl(int taka) {
 
-                /*hér á ég eftir að útfæra solver sem skoðar hvort að þegar aðferðin tekur einn
-                reit í burtu að það skapi ekki púsl með með fleirri en einni lausn.
-                */
-                removed++;
+        Random rand = new Random();
+        List<Integer> removeMoguleikar = new ArrayList<>();
+        for (int i = 0; i < 81; i++) {
+            removeMoguleikar.add(i);
+        }
+        Collections.shuffle(removeMoguleikar);
+
+        int teknirReitir = 0;
+        for (int i = 0; i < taka; i++) {
+            int reiturIndex = removeMoguleikar.get(i);
+            int row = reiturIndex / 9;
+            int col = reiturIndex % 9;
+
+            if (bord[row][col] != 0) {
+                bord[row][col] = 0;
+                teknirReitir++;
+            }
+            updateUI(row, col, "");
+        }
+        System.out.println("reitir teknir: " + teknirReitir);
+    }
+
+    private void updateUI(int row, int col, String value) {
+        for (Node node : sudokuGrid.getChildren()) {
+            // Default to 0 if the row or column index is null
+            Integer nodeRow = GridPane.getRowIndex(node) != null ? GridPane.getRowIndex(node) : 0;
+            Integer nodeCol = GridPane.getColumnIndex(node) != null ? GridPane.getColumnIndex(node) : 0;
+
+            if (nodeRow == row && nodeCol == col && node instanceof TextField) {
+                ((TextField) node).setText(value);
+                break;
             }
         }
     }
 
-    public int updateErfidleikastig(String erfidleikastig) {
-        if (erfidleikastig.equals("Auðvelt")) {
-            return 30;
-        } else if (erfidleikastig.equals("Miðlungs")) {
-            return 35;
-        } else if (erfidleikastig.equals("Erfitt")) {
-            return 40;
-        } else if (erfidleikastig.equals("Ómögulegt")) {
-            return 47;
-        } else
-            return 30;
+
+    public void setErfidleikastig(int difficultyLevel) {
+        this.erfidleiki = difficultyLevel;
+        fyllaGrid();
     }
 
 
