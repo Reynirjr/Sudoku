@@ -27,6 +27,11 @@ Leiknum er svo lokið þegar notandi skilar inn jafn mörgum reitum og teknir vo
 
 <p>&nbsp;</p>
 
+### Prófanir
+Við tókum allir virkan þátt í að prófa...
+
+<p>&nbsp;</p>
+
 ### Keyrsla
 Hér eru leiðbeiningar að því hvernig hægt er að keyra og byggja forrit.
 * Einfaldast er að afrita URL undir "code" í Repositary og opna verkefnið inn í IntelliJ IDEA, VSCode eða einhverju sambærilegu.
