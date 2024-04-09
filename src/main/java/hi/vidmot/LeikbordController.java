@@ -171,12 +171,13 @@ public class LeikbordController {
         }
     }
 
+    //Alert þegar Notandi klárar púslið
     private void sigurMessage() {
+        sudokuController.stopTimer();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Victory");
         alert.setHeaderText(null);
-        alert.setContentText("Til Hamingju Þú Leystir Sudok-ið");
-
+        alert.setContentText("Til Hamingju Þú Leystir Súdókúið");
         alert.showAndWait();
     }
 
