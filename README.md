@@ -5,6 +5,13 @@ Notandi keyrir forrit og velur erfiðleikastig. Forritið býr til nýja Sudoku 
 
 
 ### Keyrsla
+Hér eru leiðbeiningar að því hvernig hægt er að keyra og byggja forrit.
+* Hlaðið niður zip skjali
+* Skoðið hvar skjalið er staðsett
+* Opnið Terminal
+* Breytið vísun í rót verkefnisins(þar sem pom.xml skjalið er staðsett) með "cd path/to/project"
+* Sláið inn "mvn compile" í Terminal
+* Og svo loks til að keyra forritið sláið inn "mvn exec:java -Dexec.mainClass="packageName.MainClassName"
 
 
 ### Notendaprófanir
