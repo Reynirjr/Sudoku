@@ -46,6 +46,16 @@ public class SudokuController {
 
     }
 
+    public String formatTime(int heildarSek) {
+        int min = heildarSek / 60;
+        int sek = heildarSek % 60;
+        return String.format("%02d:%02d", min, sek);
+    }
+
+    public int getSek() {
+        return sek;
+    }
+
     public void stopTimer() {
         if (timeline != null) {
             timeline.stop();
