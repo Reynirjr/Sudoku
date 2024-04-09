@@ -8,13 +8,9 @@ Notandi keyrir forrit og velur erfiðleikastig. Forritið býr til nýja Sudoku 
 Hér eru leiðbeiningar að því hvernig hægt er að keyra og byggja forrit.
 * Einfaldast er að afrita URL undir "code" í Repositary og opna verkefnið inn í IntelliJ IDEA, VSCode eða einhverju sambærilegu.
 * Svo næst þarf að passa að Maven er virkt og að þú hefur útgáfu af java sem að styður verkefnið.
-* 
-* Hlaðið niður zip skjali
-* Skoðið hvar skjalið er staðsett
-* Opnið Terminal
-* Breytið vísun í rót verkefnisins(þar sem pom.xml skjalið er staðsett) með "cd path/to/project"
-* Sláið inn "mvn compile" í Terminal
-* Og svo loks til að keyra forritið sláið inn "mvn exec:java -Dexec.mainClass="packageName.MainClassName"
+* Keyrið forritið, hægt er að keyra forritið í gegn um Terminal eða þróunartól eins og IntelliJ þar sem að notandi ýtir á Maven merkið við hlið kóðans og finnur "javafx:run" sem hann smellir á.
+* Ef notandi kýs að opna forritið í gegnum Terminal þarf hann að vísa í rót verkefnisins með "cd /dæmi/um/leið/að/Sudoku"
+* Næst skal hann slá inn "mvn compile" og svo "mvn exec:java -Dexec.mainClass="src.main.java.hi.vidmot.SudokuApplication""
 
 
 ### Notendaprófanir
