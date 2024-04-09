@@ -6,6 +6,9 @@ Notandi keyrir forrit og velur erfiðleikastig. Forritið býr til nýja Sudoku 
 
 ### Keyrsla
 Hér eru leiðbeiningar að því hvernig hægt er að keyra og byggja forrit.
+* Einfaldast er að afrita URL undir "code" í Repositary og opna verkefnið inn í IntelliJ IDEA, VSCode eða einhverju sambærilegu.
+* Svo næst þarf að passa að Maven er virkt og að þú hefur útgáfu af java sem að styður verkefnið.
+* 
 * Hlaðið niður zip skjali
 * Skoðið hvar skjalið er staðsett
 * Opnið Terminal
