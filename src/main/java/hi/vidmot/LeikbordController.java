@@ -1,18 +1,22 @@
 package hi.vidmot;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.io.IOException;
+import java.util.*;
 
 public class LeikbordController {
     @FXML
@@ -37,7 +41,7 @@ public class LeikbordController {
 
     private int[][] copyBordid = new int[9][9];//copy af borðinu
 
-    private boolean[][] retturReitur = new boolean[9][9];
+    private boolean[][] retturReitur = new boolean[9][9];//
 
 
     public void setSudokuController(SudokuController aThis) {
@@ -92,12 +96,11 @@ public class LeikbordController {
                         if (!newValue.isEmpty() && newValue.matches("[1-9]")) {
                             int num = Integer.parseInt(newValue);
                             if (erNumberRett(finalRow, finalCol, num)) {// Rett svar
-                                retturReitur[finalRow][finalCol] = true;
                                 rettNumerIReit++;
                                 reiturTextField.getStyleClass().add("correct-answer");
                                 reiturTextField.setEditable(false);
                                 reiturTextField.setDisable(true);
-                                refreshReitirStyle();
+
 
                                 if (rettNumerIReit == teknirReitir) {
                                     sigurMessage();
@@ -105,7 +108,6 @@ public class LeikbordController {
 
                             } else {
                                 // Rangt svar
-                                retturReitur[finalRow][finalCol] = false;
                                 reiturTextField.setStyle("-fx-background-color: pink; -fx-text-fill: red;");
                                 reiturTextField.getStyleClass().add("incorrect-answer");
                                 rangtNumerIReit++;
@@ -179,7 +181,29 @@ public class LeikbordController {
         alert.setTitle("Victory");
         alert.setHeaderText(null);
         alert.setContentText("Til Hamingju! Þú Leystir Súdókúið! Þinn tími var " + eyddurTimi);
-        alert.showAndWait();
+
+        ButtonType newGameButton = new ButtonType("Hefja nýjan leik");
+        ButtonType cancelButton = new ButtonType("Hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(newGameButton, cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == newGameButton) {
+            Stage stage = (Stage) sudokuGrid.getScene().getWindow();
+            stage.close();
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/hi/vidmot/erfidleikastig-view.fxml"));
+                Parent root = loader.load();
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                newStage.setTitle("Veldu Erfiðleika!");
+                newStage.show();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+
     }
 
     private void tapMessage() {
@@ -188,7 +212,27 @@ public class LeikbordController {
         alert.setHeaderText(null);
         alert.setContentText("Leik Lokið þú Fékkst 3 villur");
 
-        alert.showAndWait();
+        ButtonType newGameButton = new ButtonType("Hefja nýjan leik");
+        ButtonType cancelButton = new ButtonType("Hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(newGameButton, cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == newGameButton) {
+            Stage stage = (Stage) sudokuGrid.getScene().getWindow();
+            stage.close();
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/hi/vidmot/erfidleikastig-view.fxml"));
+                Parent root = loader.load();
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                newStage.setTitle("Veldu Erfiðleika!");
+                newStage.show();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
     }
 
     private boolean fylltBord(int row, int col) {
@@ -278,21 +322,6 @@ public class LeikbordController {
     private void copyBord(int[][] source, int[][] dest) {
         for (int i = 0; i < source.length; i++) {
             System.arraycopy(source[i], 0, dest[i], 0, source[i].length);
-        }
-    }
-
-    private void refreshReitirStyle() {
-        for (Node node : sudokuGrid.getChildren()) {
-            if (node instanceof TextField) {
-                TextField reitur = (TextField) node;
-                int row = GridPane.getRowIndex(reitur);
-                int col = GridPane.getColumnIndex(reitur);
-
-                if (retturReitur[row][col]) {
-                    reitur.setDisable(true);
-                }
-
-            }
         }
     }
 

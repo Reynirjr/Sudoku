@@ -15,7 +15,7 @@
             </font>
         </Label>
         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
-            <Button mnemonicParsing="false" text="Nýr Leikur"/>
+            <Button fx:id="nyrLeikurButton" mnemonicParsing="false" onAction="#onNyrLeikur" text="Nýr Leikur"/>
             <Button mnemonicParsing="false" text=" Pása leik"/>
         </HBox>
         <Label fx:id="timeLabel" text="Tími: 00:00">
