@@ -1,0 +1,13 @@
+.correct-answer {
+    -fx-text-fill: green;
+    -fx-background-color: lightgreen;
+}
+.correct-answer:disabled {
+    -fx-opacity: 1;
+    -fx-text-fill: green;
+    -fx-background-color: lightgreen;
+}
+.incorrect-answer {
+    -fx-text-fill: red;
+    -fx-background-color: pink;
+}

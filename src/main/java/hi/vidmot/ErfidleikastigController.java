@@ -38,10 +38,12 @@ public class ErfidleikastigController {
         SudokuController sudokuController = loader.getController();
         sudokuController.setDifficulty(difficulty);
 
-        // Get the current stage and set the scene
-        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 650, 600);
+        scene.getStylesheets().add(getClass().getResource("/hi/vidmot/css/styles.css").toExternalForm());
 
-        stage.setScene(new Scene(root, 650, 600));
+
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
         stage.show();
     }
 }
