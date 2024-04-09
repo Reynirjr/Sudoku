@@ -1,6 +1,7 @@
 package hi.vidmot;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 public class SudokuController {
 
@@ -10,6 +11,11 @@ public class SudokuController {
 
     @FXML
     private LeikbordController leikbordStyringController;
+
+    @FXML
+    private Label villaLabel;
+
+    private int villur = 0;
 
     @FXML
     public void initialize() {
@@ -32,5 +38,11 @@ public class SudokuController {
 
         leikbordStyringController.setErfidleikastig(difficultyLevel);
     }
+
+    public void setVillur(int villa) {
+        this.villur = villa;
+        villaLabel.setText("Villur: " + villa);
+    }
+
 
 }

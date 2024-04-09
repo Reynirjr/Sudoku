@@ -109,6 +109,7 @@ public class LeikbordController {
                                 reiturTextField.setStyle("-fx-background-color: pink; -fx-text-fill: red;");
                                 reiturTextField.getStyleClass().add("incorrect-answer");
                                 rangtNumerIReit++;
+                                sudokuController.setVillur(rangtNumerIReit);
                                 if (rangtNumerIReit >= 3) {
                                     tapMessage();
                                 }
