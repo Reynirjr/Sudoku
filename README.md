@@ -1,7 +1,13 @@
 # Sudoku
 ## Verkefni 8 - Viðmótsforritun
+### Um Verkefnið
+Við ákváðum að smíða forrit sem býr til Sudoku þraut fyrir notenda. Við höfum allir mikinn áhuga á Sudoku og lá því valið fyrir hendi. 
+
 ### Lýsing
-Notandi keyrir forrit og velur erfiðleikastig. Forritið býr til nýja Sudoku þraut eftir erfiðleikastigi og tekur tíma. Ef notandi svarar rangt þrisvar sinnum hefur notandi tapað leiknum og tími stöðvast. Ef notandi klárar þrautina birtist gluggi sem tilkynnir honum að hann hafi klárað leik. 
+* Notandi keyrir forrit og velur erfiðleikastig.
+* Forritið býr til nýja Sudoku þraut eftir erfiðleikastigi og tekur tíma.
+* Ef notandi svarar rangt þrisvar sinnum hefur notandi tapað leiknum og tími stöðvast.
+* Ef notandi klárar þrautina birtist gluggi sem tilkynnir honum að hann hafi klárað leik. 
 
 
 ### Keyrsla
@@ -20,3 +26,18 @@ Notendi skal prófa eftirfarandi atriði:
 3. Byrjaðu nýjan leik og leystu þrautina á undir 5 mínútum með færri en 3 villur.
 4. Leystu þrautina á undir 2 mínútum.
 5. Leystu þrautina með því að klára einn kassa í einu.
+
+| Notendaupplifun | Mjög ósammála | Ósammála  | Hlutlaus | Sammála | Mjög sammála |
+| ------------- | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
+| Forritið var  |  |  |  |  |  |
+| eih |  |  |  |  |  |
+| eih |  |  |  |  |  |
+| eih |  |  |  |  |  |
+
+### Verkefnaskipting
+| Benjamín | Egill | Róbert |
+| ------------- | ------------- | ------------- |
+| eih | eih | eih |
+| eih | eih | eih |
+| eih | eih | eih |
+
