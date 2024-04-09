@@ -1,9 +1,16 @@
 package hi.vidmot;
 
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class SudokuController {
@@ -90,4 +97,24 @@ public class SudokuController {
     }
 
 
+    public void onNyrLeikur(ActionEvent event) {
+        try {
+            // Close the current stage
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+
+            // Load the difficulty selection screen
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("erfidleikastig-view.fxml")); // Adjust path as necessary
+            Parent root = loader.load();
+
+            // Create and show the new stage
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(root));
+            newStage.setTitle("Choose Difficulty");
+            newStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
