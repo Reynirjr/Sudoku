@@ -30,19 +30,20 @@ public class LeikbordController {
 
     private int rettNumerIReit = 0;
 
+    private int rangtNumerIReit = 0;
+
 
     private final int[][] bord = new int[9][9];//Sudoku borðið
 
     private int[][] copyBordid = new int[9][9];//copy af borðinu
+
+    private boolean[][] retturReitur = new boolean[9][9];
 
 
     public void setSudokuController(SudokuController aThis) {
         sudokuController = aThis;
     }
 
-    public void setMenuController(MenuController aThis) {
-        menuController = aThis;
-    }
 
     public void initialize() {
         sudokuGrid.widthProperty().addListener((obs, oldVal, newVal) -> updateGridStaerd());
@@ -90,19 +91,27 @@ public class LeikbordController {
                     reiturTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                         if (!newValue.isEmpty() && newValue.matches("[1-9]")) {
                             int num = Integer.parseInt(newValue);
-                            if (erNumberRett(finalRow, finalCol, num)) {
-                                // Rett svar
-                                reiturTextField.setStyle("-fx-background-color: lightgreen; -fx-text-fill: green;");
+                            if (erNumberRett(finalRow, finalCol, num)) {// Rett svar
+                                retturReitur[finalRow][finalCol] = true;
+                                rettNumerIReit++;
+                                reiturTextField.getStyleClass().add("correct-answer");
                                 reiturTextField.setEditable(false);
                                 reiturTextField.setDisable(true);
-                                rettNumerIReit++;
+                                refreshReitirStyle();
+
                                 if (rettNumerIReit == teknirReitir) {
                                     sigurMessage();
                                 }
 
                             } else {
                                 // Rangt svar
+                                retturReitur[finalRow][finalCol] = false;
                                 reiturTextField.setStyle("-fx-background-color: pink; -fx-text-fill: red;");
+                                reiturTextField.getStyleClass().add("incorrect-answer");
+                                rangtNumerIReit++;
+                                if (rangtNumerIReit >= 3) {
+                                    tapMessage();
+                                }
                             }
                         }
                     });
@@ -166,6 +175,15 @@ public class LeikbordController {
         alert.setTitle("Victory");
         alert.setHeaderText(null);
         alert.setContentText("Til Hamingju Þú Leystir Sudok-ið");
+
+        alert.showAndWait();
+    }
+
+    private void tapMessage() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Over");
+        alert.setHeaderText(null);
+        alert.setContentText("Leik Lokið þú Fékkst 3 villur");
 
         alert.showAndWait();
     }
@@ -260,15 +278,19 @@ public class LeikbordController {
         }
     }
 
-    private boolean erBordidLeyst() {
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
-                if (bord[row][col] == 0 || bord[row][col] != copyBordid[row][col]) {
-                    return false;
+    private void refreshReitirStyle() {
+        for (Node node : sudokuGrid.getChildren()) {
+            if (node instanceof TextField) {
+                TextField reitur = (TextField) node;
+                int row = GridPane.getRowIndex(reitur);
+                int col = GridPane.getColumnIndex(reitur);
+
+                if (retturReitur[row][col]) {
+                    reitur.setDisable(true);
                 }
+
             }
         }
-        return true;
     }
 
 
