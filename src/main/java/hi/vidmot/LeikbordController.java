@@ -2,6 +2,7 @@ package hi.vidmot;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -25,8 +26,14 @@ public class LeikbordController {
 
     private int erfidleiki = 0;
 
+    private int teknirReitir = 0;
+
+    private int rettNumerIReit = 0;
+
 
     private final int[][] bord = new int[9][9];//Sudoku borðið
+
+    private int[][] copyBordid = new int[9][9];//copy af borðinu
 
 
     public void setSudokuController(SudokuController aThis) {
@@ -62,21 +69,51 @@ public class LeikbordController {
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
+                final int finalRow = row;
+                final int finalCol = col;
                 TextField reiturTextField = new TextField();
+                //breytir stærð og fontinu
+                reiturTextField.setFont(Font.font("Comic Sans MS", 16));
 
                 if (bord[row][col] != 0) {
                     reiturTextField.setText(Integer.toString(bord[row][col]));
+                    reiturTextField.setEditable(false);
+                    reiturTextField.setDisable(true);
+                    reiturTextField.setStyle("-fx-opacity: 1;");
                 } else {
-                    reiturTextField.setText(""); // Ensure cells intended to be empty are indeed empty
+                    reiturTextField.setText(""); // Empty cells for user input
+                    reiturTextField.setEditable(true); // Make it editable
+                    reiturTextField.setStyle("-fx-text-fill: blue;");
+                    reiturTextField.textProperty().addListener((obs, oldText, newText) -> {
+                        reiturTextField.setStyle("-fx-text-fill: blue;");
+                    });
+                    reiturTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+                        if (!newValue.isEmpty() && newValue.matches("[1-9]")) {
+                            int num = Integer.parseInt(newValue);
+                            if (erNumberRett(finalRow, finalCol, num)) {
+                                // Rett svar
+                                reiturTextField.setStyle("-fx-background-color: lightgreen; -fx-text-fill: green;");
+                                reiturTextField.setEditable(false);
+                                reiturTextField.setDisable(true);
+                                rettNumerIReit++;
+                                if (rettNumerIReit == teknirReitir) {
+                                    sigurMessage();
+                                }
+
+                            } else {
+                                // Rangt svar
+                                reiturTextField.setStyle("-fx-background-color: pink; -fx-text-fill: red;");
+                            }
+                        }
+                    });
+
+
                 }
 
 
                 reiturTextField.setMaxWidth(Double.MAX_VALUE);
                 reiturTextField.setMaxHeight(Double.MAX_VALUE);
 
-
-                //breytir stærð og fontinu
-                reiturTextField.setFont(Font.font("Comic Sans MS", 16));
 
                 //Þarf að vera 1 - 9
                 reiturTextField.addEventFilter(KeyEvent.KEY_TYPED, keyEvent -> {
@@ -104,6 +141,7 @@ public class LeikbordController {
                     }
                 });
 
+
                 //Gerir línurnar á milli þykkar á endunum og á milli "subgrids"
                 double toppur = row % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
                 double haegri = (col + 1) % 3 == 0 ? ytriBorderThickness : innriBorderThickness;
@@ -123,12 +161,21 @@ public class LeikbordController {
         }
     }
 
-    private boolean fylltbord(int row, int col) {
+    private void sigurMessage() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Victory");
+        alert.setHeaderText(null);
+        alert.setContentText("Til Hamingju Þú Leystir Sudok-ið");
+
+        alert.showAndWait();
+    }
+
+    private boolean fylltBord(int row, int col) {
         if (row == 9) {
             row = 0;
             if (++col == 9) return true;
         }
-        if (bord[row][col] != 0) return fylltbord(row + 1, col);
+        if (bord[row][col] != 0) return fylltBord(row + 1, col);
         List<Integer> nums = new ArrayList<>();
         for (int i = 1; i <= 9; i++) nums.add(i);
         Collections.shuffle(nums);//slembin númer
@@ -136,12 +183,17 @@ public class LeikbordController {
         for (Integer num : nums) {
             if (erRettStadsetning(row, col, num)) {
                 bord[row][col] = num;
-                if (fylltbord(row + 1, col)) return true;
+                if (fylltBord(row + 1, col)) return true;
                 bord[row][col] = 0;
             }
         }
         return false;
     }
+
+    private boolean erNumberRett(int row, int col, int number) {
+        return copyBordid[row][col] == number;
+    }
+
 
     private boolean erRettStadsetning(int row, int col, int num) {
         for (int i = 0; i < 9; i++) {
@@ -154,7 +206,8 @@ public class LeikbordController {
     }
 
     private void buaTilSudoku() {
-        fylltbord(0, 0);//fyllir borðið frá top-vinstra horni
+        fylltBord(0, 0);//fyllir borðið frá top-vinstra horni
+        copyBord(bord, copyBordid);
         geraPusl(erfidleiki);
     }
 
@@ -168,7 +221,6 @@ public class LeikbordController {
         }
         Collections.shuffle(removeMoguleikar);
 
-        int teknirReitir = 0;
         for (int i = 0; i < taka; i++) {
             int reiturIndex = removeMoguleikar.get(i);
             int row = reiturIndex / 9;
@@ -200,6 +252,23 @@ public class LeikbordController {
     public void setErfidleikastig(int difficultyLevel) {
         this.erfidleiki = difficultyLevel;
         fyllaGrid();
+    }
+
+    private void copyBord(int[][] source, int[][] dest) {
+        for (int i = 0; i < source.length; i++) {
+            System.arraycopy(source[i], 0, dest[i], 0, source[i].length);
+        }
+    }
+
+    private boolean erBordidLeyst() {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (bord[row][col] == 0 || bord[row][col] != copyBordid[row][col]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 
