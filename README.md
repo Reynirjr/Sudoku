@@ -15,8 +15,8 @@ Hér eru leiðbeiningar að því hvernig hægt er að keyra og byggja forrit.
 * Einfaldast er að afrita URL undir "code" í Repositary og opna verkefnið inn í IntelliJ IDEA, VSCode eða einhverju sambærilegu.
 * Svo næst þarf að passa að Maven er virkt og að þú hefur útgáfu af java sem að styður verkefnið.
 * Keyrið forritið, hægt er að keyra forritið í gegn um Terminal eða þróunartól eins og IntelliJ þar sem að notandi ýtir á Maven merkið við hlið kóðans og finnur "javafx:run" sem hann smellir á.
-* Ef notandi kýs að opna forritið í gegnum Terminal þarf hann að vísa í rót verkefnisins með "cd /dæmi/um/leið/að/Sudoku"
-* Næst skal hann slá inn "mvn compile" og svo "mvn exec:java -Dexec.mainClass="src.main.java.hi.vidmot.SudokuApplication""
+* Ef notandi kýs að opna forritið í gegnum Terminal þarf hann að vísa í rót verkefnisins með skipununni: "cd /dæmi/um/leið/að/Sudoku".
+* Næst skal hann slá inn "mvn compile" og svo "mvn exec:java -Dexec.mainClass="src.main.java.hi.vidmot.SudokuApplication"".
 
 
 ### Notendaprófanir
