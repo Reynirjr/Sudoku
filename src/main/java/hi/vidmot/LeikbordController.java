@@ -30,6 +30,8 @@ public class LeikbordController {
 
     private int rettNumerIReit = 0;
 
+    private int rangtNumerIReit = 0;
+
 
     private final int[][] bord = new int[9][9];//Sudoku borðið
 
@@ -103,6 +105,10 @@ public class LeikbordController {
                             } else {
                                 // Rangt svar
                                 reiturTextField.setStyle("-fx-background-color: pink; -fx-text-fill: red;");
+                                rangtNumerIReit++;
+                                if (rangtNumerIReit >= 3) {
+                                    tapMessage();
+                                }
                             }
                         }
                     });
@@ -166,6 +172,15 @@ public class LeikbordController {
         alert.setTitle("Victory");
         alert.setHeaderText(null);
         alert.setContentText("Til Hamingju Þú Leystir Sudok-ið");
+
+        alert.showAndWait();
+    }
+
+    private void tapMessage() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game Over");
+        alert.setHeaderText(null);
+        alert.setContentText("Leik Lokið þú Fékkst 3 villur");
 
         alert.showAndWait();
     }
@@ -258,17 +273,6 @@ public class LeikbordController {
         for (int i = 0; i < source.length; i++) {
             System.arraycopy(source[i], 0, dest[i], 0, source[i].length);
         }
-    }
-
-    private boolean erBordidLeyst() {
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
-                if (bord[row][col] == 0 || bord[row][col] != copyBordid[row][col]) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
 
