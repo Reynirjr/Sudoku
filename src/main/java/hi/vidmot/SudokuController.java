@@ -8,7 +8,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -22,10 +25,19 @@ public class SudokuController {
     private LeikbordController leikbordStyringController;
 
     @FXML
+    private StackPane leikContainer;
+
+    @FXML
+    private Pane coverPane;
+
+    @FXML
     private Label villaLabel;
 
     @FXML
     private Label timeLabel;
+
+    @FXML
+    private Button pasaButton;
 
     private Timeline timeline;
     private int sek = 0;
@@ -109,6 +121,20 @@ public class SudokuController {
             nuverandiStage.show();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void onPasa(ActionEvent actionEvent) {
+        if (pasaButton.getText().equals("Pása leik")) {
+            pasaButton.setText("Hefja leik");
+            coverPane.setVisible(true);
+            coverPane.setMouseTransparent(false);
+            timeline.pause();
+        } else {
+            pasaButton.setText("Pása leik");
+            coverPane.setVisible(false);
+            coverPane.setMouseTransparent(true);
+            timeline.play();
         }
     }
 }
