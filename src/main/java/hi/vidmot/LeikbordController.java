@@ -5,14 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -82,25 +80,24 @@ public class LeikbordController {
 
                 if (bord[row][col] != 0) {
                     reiturTextField.setText(Integer.toString(bord[row][col]));
-                    reiturTextField.setEditable(false);
                     reiturTextField.setDisable(true);
                     reiturTextField.setStyle("-fx-opacity: 1;");
                 } else {
-                    reiturTextField.setText(""); // Empty cells for user input
-                    reiturTextField.setEditable(true); // Make it editable
-                    reiturTextField.setStyle("-fx-text-fill: blue;");
+                    reiturTextField.setText("");
+                    reiturTextField.setEditable(true);
+                    reiturTextField.setStyle("-fx-text-fill: green;");
                     reiturTextField.textProperty().addListener((obs, oldText, newText) -> {
-                        reiturTextField.setStyle("-fx-text-fill: blue;");
+                        reiturTextField.setStyle("-fx-text-fill: green;");
                     });
                     reiturTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                         if (!newValue.isEmpty() && newValue.matches("[1-9]")) {
                             int num = Integer.parseInt(newValue);
                             if (erNumberRett(finalRow, finalCol, num)) {// Rett svar
                                 rettNumerIReit++;
+                                reiturTextField.getStyleClass().remove("incorrect-answer");
                                 reiturTextField.getStyleClass().add("correct-answer");
                                 reiturTextField.setEditable(false);
                                 reiturTextField.setDisable(true);
-
 
                                 if (rettNumerIReit == teknirReitir) {
                                     sigurMessage();
@@ -121,6 +118,13 @@ public class LeikbordController {
 
 
                 }
+
+                reiturTextField.setOnMouseClicked(event -> highlightSomuNumer(reiturTextField.getText()));
+                reiturTextField.textProperty().addListener((obs, oldText, newText) -> {
+                    if (!newText.matches("\\d*")) {
+                        reiturTextField.setText(newText.replaceAll("[^\\d]", ""));
+                    }
+                });
 
 
                 reiturTextField.setMaxWidth(Double.MAX_VALUE);
@@ -172,6 +176,24 @@ public class LeikbordController {
 
         }
     }
+
+    private void highlightSomuNumer(String numer) {
+        if (numer.isEmpty()) return;
+
+        for (Node node : sudokuGrid.getChildren()) {
+            if (node instanceof StackPane) {
+                Label lbl = (Label) ((StackPane) node).getChildren().get(0);
+                if (lbl.getText().equals(numer)) {
+                    lbl.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 16));
+                    lbl.setTextFill(Color.LIGHTBLUE);
+                } else {
+                    lbl.setFont(Font.font("Comic Sans MS", FontWeight.NORMAL, 16));
+                    lbl.setTextFill(Color.BLACK);
+                }
+            }
+        }
+    }
+
 
     //Alert þegar Notandi klárar púslið
     private void sigurMessage() {
