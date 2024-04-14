@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
@@ -16,7 +18,7 @@
         </Label>
         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
             <Button fx:id="nyrLeikurButton" mnemonicParsing="false" onAction="#onNyrLeikur" text="Nýr Leikur"/>
-            <Button mnemonicParsing="false" text=" Pása leik"/>
+            <Button fx:id="pasaButton" mnemonicParsing="false" onAction="#onPasa" text="Pása leik"/>
         </HBox>
         <Label fx:id="timeLabel" text="Tími: 00:00">
             <font>
@@ -28,6 +30,11 @@
                 <Font name="Comic Sans MS" size="14.0"/>
             </font>
         </Label>
-        <fx:include fx:id="leikbordStyring" source="leikbord-view.fxml"/>
+        <StackPane fx:id="leikContainer" alignment="CENTER">
+            <children>
+                <fx:include fx:id="leikbordStyring" source="leikbord-view.fxml"/>
+                <Pane fx:id="coverPane" style="-fx-background-color: #d3d3d3;" visible="false"/>
+            </children>
+        </StackPane>
     </children>
 </VBox>
