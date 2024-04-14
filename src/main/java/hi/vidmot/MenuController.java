@@ -8,7 +8,8 @@ import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
 public class MenuController {
-    @FXML
+
+
     private SudokuController sudokuController;
 
     @FXML
@@ -26,7 +27,9 @@ public class MenuController {
 
 
     public void onNewGame(ActionEvent actionEvent) {
+        sudokuController.onNyrLeikur(actionEvent);
     }
+
 
     public void onQuit(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
