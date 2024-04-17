@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
+<!-- Ensure this line includes VBox -->
+<!-- For Insets -->
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.*?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" fx:controller="hi.vidmot.ErfidleikastigController" xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" maxHeight="Infinity" maxWidth="Infinity" minHeight="400.0"
+      minWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="hi.vidmot.ErfidleikastigController">
     <children>
-        <Label layoutX="189.0" layoutY="42.0" text="SUDOKU!">
-            <font>
-                <Font name="Comic Sans MS Bold" size="48.0"/>
-            </font>
-        </Label>
-        <Label layoutX="188.0" layoutY="164.0" text="Veldu Erfiðleikastig">
-            <font>
-                <Font name="Comic Sans MS" size="24.0"/>
-            </font>
-        </Label>
-        <HBox alignment="CENTER" layoutX="89.0" layoutY="249.0" spacing="40.0">
+        <Label text="SUDOKU!" style="-fx-font-size: 48; -fx-font-family: 'Comic Sans MS Bold';"/>
+        <Label text="Veldu Erfiðleikastig" style="-fx-font-size: 24; -fx-font-family: 'Comic Sans MS';"/>
+        <HBox alignment="CENTER" spacing="40">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
             <children>
                 <Button fx:id="Easy" alignment="CENTER" mnemonicParsing="false" onAction="#onEasy" text="Auðvelt"
                         textFill="#29ae24">
@@ -54,9 +49,6 @@
                     </cursor>
                 </Button>
             </children>
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-            </padding>
         </HBox>
     </children>
-</AnchorPane>
+</VBox>
