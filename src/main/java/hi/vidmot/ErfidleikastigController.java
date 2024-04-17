@@ -38,7 +38,7 @@ public class ErfidleikastigController {
         SudokuController sudokuController = loader.getController();
         sudokuController.setDifficulty(difficulty);
 
-        Scene scene = new Scene(root, 650, 600);
+        Scene scene = new Scene(root, 650, 650);
         scene.getStylesheets().add(getClass().getResource("/hi/vidmot/css/styles.css").toExternalForm());
 
 
