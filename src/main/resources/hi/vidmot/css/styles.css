@@ -11,3 +11,6 @@
     -fx-text-fill: red;
     -fx-background-color: pink;
 }
+.background {
+-fx-background-color: linear-gradient(to bottom, #7CB9E8, #6CB4EE);
+}

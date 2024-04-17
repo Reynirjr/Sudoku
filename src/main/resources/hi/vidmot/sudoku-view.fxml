@@ -7,7 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="hi.vidmot.SudokuController">
+      fx:controller="hi.vidmot.SudokuController"
+      stylesheets="@css"
+      styleClass="background">
 
     <children>
         <fx:include fx:id="menuStyring" source="menu-view.fxml"/>
