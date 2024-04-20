@@ -40,29 +40,4 @@ Hér eru leiðbeiningar að því hvernig hægt er að keyra og byggja forrit.
 * Ef notandi kýs að opna forritið í gegnum Terminal þarf hann að vísa í rót verkefnisins með skipununni: "cd /dæmi/um/leið/að/Sudoku".
 * Næst skal hann slá inn "mvn compile" og svo "mvn exec:java -Dexec.mainClass="src.main.java.hi.vidmot.SudokuApplication"".
 
-<p>&nbsp;</p>
-
-### Notendaprófanir
-Notendi skal prófa eftirfarandi atriði:
-1. Veldu erfiðleikastig.
-2. Sláðu inn rangt svar þrisvar sinnum.
-3. Byrjaðu nýjan leik og leystu þrautina á undir 5 mínútum með færri en 3 villur.
-4. Leystu þrautina á undir 2 mínútum.
-5. Leystu þrautina með því að klára einn kassa í einu.
-
-| Notendaupplifun | Mjög ósammála | Ósammála  | Hlutlaus | Sammála | Mjög sammála |
-| ------------- | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
-| Forritið var  |  |  |  |  |  |
-| eih |  |  |  |  |  |
-| eih |  |  |  |  |  |
-| eih |  |  |  |  |  |
-
-<p>&nbsp;</p>
-
-### Verkefnaskipting
-| Benjamín | Egill | Róbert |
-| ------------- | ------------- | ------------- |
-| eih | eih | eih |
-| eih | eih | eih |
-| eih | eih | eih |
 
